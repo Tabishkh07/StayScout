@@ -6,17 +6,15 @@
     <h3>List Details:</h3>
   </div>
 
-  <!-- Listing Card -->
   <div class="col-8 offset-2 mt-3">
     <div class="card">
 
-      <!-- Image with fallback -->
       <img 
         src="<%= listing.image && listing.image.url && listing.image.url.trim() !== '' 
-              ? listing.image.url 
-              : 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157' %>"
+          ? listing.image.url 
+          : 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157?auto=format&fit=crop&w=800&q=60' %>"
         class="card-img-top show-img"
-        alt="listing_img">
+        alt="listing image">
 
       <div class="card-body">
         <h5 class="card-title"><%= listing.title %></h5>
@@ -30,19 +28,14 @@
           <%= listing.location %>, <%= listing.country %>
         </p>
 
-        <!-- Action Buttons -->
         <div class="d-flex gap-2 mt-3">
-
           <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">
             Edit
           </a>
 
-          <form action="/listings/<%= listing._id %>?_method=delete" method="post">
-            <button class="btn btn-dark">
-              Delete
-            </button>
+          <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+            <button class="btn btn-dark">Delete</button>
           </form>
-
         </div>
       </div>
 
