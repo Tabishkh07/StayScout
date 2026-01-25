@@ -5,6 +5,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 // user route importing.
 const listings = require("./routes/listing.js");
@@ -26,9 +28,29 @@ main().then(()=>{
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/stayscout");
 }
-    
+
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    },
+};
+
 app.get("/", (req, res)=>{
     res.send("hi am root");
+});
+
+app.use(session(sessionOptions));
+app.use(flash());
+    
+app.use((req, res, next)=>{
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
 });
 
 // listing route 
