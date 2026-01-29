@@ -32,7 +32,8 @@ router.get("/login", (req, res)=>{
 // to check if user exits
 router.post("/login", passport.authenticate("local", {failureRedirect: '/login', failureFlash: true}),
     async(req, res)=>{
-        res.send ("Welcome to StayScout! You are logged in!");
-});
+        req. flash("success", "Welcome back to StayScout!!");
+        res. redirect("/listings");
+    });
 
 module.exports = router;
