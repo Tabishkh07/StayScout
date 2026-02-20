@@ -13,7 +13,7 @@ router
 
 router
     .route("/login")
-    .get(userController.reanderLoginForm)    // for login
+    .get(userController.renderLoginForm)    // for login
     .post(saveRedirectUrl,    // to check if user exits
     passport.authenticate("local", 
         {failureRedirect: '/login', 
