@@ -56,7 +56,7 @@ body {
 }
 
 /* Cards */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -118,4 +118,21 @@ body {
 
 .card-body {
   padding: 1.25rem;
+}
+
+/* map styling */
+#map{
+    height:400px;
+    width: 90vh;
+    background: #ddd;
+
+}
+.airbnb-tooltip {
+  background: white;
+  color: #222;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border: none;
 }
