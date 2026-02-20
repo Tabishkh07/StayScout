@@ -21,6 +21,8 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/users.js");
 
+const dburl = process. env.ATLASDB_URL;
+
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -36,7 +38,7 @@ main().then(()=>{
 });
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/stayscout");
+    await mongoose.connect(dburl);
 }
 
 const sessionOptions = {
@@ -50,9 +52,9 @@ const sessionOptions = {
     },
 };
 
-app.get("/", (req, res)=>{
-    res.send("hi am root");
-});
+// app.get("/", (req, res)=>{
+//     res.send("hi am root");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());
