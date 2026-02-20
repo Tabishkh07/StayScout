@@ -1,50 +1,52 @@
 const User = require("../models/user.js");
 
-// for signup form
-module.exports.renderSignupForm = (req, res,next)=>{
-    res.render("users/signup.ejs");
+// ================= SIGNUP FORM =================
+module.exports.renderSignupForm = (req, res) => {
+    return res.render("users/signup.ejs");
 };
 
-// for saving in signup data in database
-module.exports.signup = async(req,res)=>{
-    try{
-        let {username, email, password} = req.body;
-        const newUser = new User({email, username});
-        const registerdUser = await User.register(newUser, password);
-        console.log(registerdUser);
-        // automatic login.
-        req.login(registerdUser, (err)=>{
-            if(err){
-                return next(err);
+// ================= SIGNUP =================
+module.exports.signup = async (req, res, next) => {
+    try {
+        const { username, email, password } = req.body;
+
+        const newUser = new User({ email, username });
+        const registeredUser = await User.register(newUser, password);
+
+        // auto login
+        req.login(registeredUser, (err) => {
+            if (err) {
+                return next(err); // ✅ safe
             }
             req.flash("success", "Welcome to StayScout");
-            res.redirect("/listings");
+            return res.redirect("/listings"); // ✅ RETURN
         });
-    }catch(err){
+
+    } catch (err) {
         req.flash("error", err.message);
-        res.redirect("/signup");
+        return res.redirect("/signup"); // ✅ RETURN
     }
 };
 
-// for login
-module.exports.renderLoginForm = (req, res)=>{
-    res.render("users/login.ejs");
-}
-
-// check if user exits
-module.exports.login = async(req, res)=>{
-    req. flash("success", "Welcome back to StayScout!!");
-    let redirectUrl = res.locals.redirectUrl || "/listings";
-    res. redirect(redirectUrl);
+// ================= LOGIN FORM =================
+module.exports.renderLoginForm = (req, res) => {
+    return res.render("users/login.ejs");
 };
 
-// logout route
-module.exports.logout = (req, res, next)=>{
-    req.logout((err)=>{
-        if(err){
+// ================= LOGIN =================
+module.exports.login = (req, res) => {
+    req.flash("success", "Welcome back to StayScout!!");
+    const redirectUrl = res.locals.redirectUrl || "/listings";
+    return res.redirect(redirectUrl); // ✅ RETURN
+};
+
+// ================= LOGOUT =================
+module.exports.logout = (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
             return next(err);
         }
         req.flash("success", "You are logged out!!");
-        res.redirect("/listings");
+        return res.redirect("/listings"); // ✅ RETURN
     });
-}
+};
