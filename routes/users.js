@@ -5,6 +5,11 @@ const {saveRedirectUrl} = require("../middleware.js");
 
 const userController = require("../controllers/users.js");
 
+// ✅ ROOT ROUTE
+router.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 // compact way
 router
     .route("/signup")
