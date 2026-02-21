@@ -52,7 +52,8 @@ const listingSchema = new Schema({
     "farm",
     "arctic",
     "dome",
-    "boat"
+    "boat",
+    "beach"
   ],
   required: true
 }
