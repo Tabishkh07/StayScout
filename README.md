@@ -59,21 +59,34 @@ StayScout/
 
 ---
 
-## ▶️ Run Locally
+## Configuration
 
-```bash
-git clone https://github.com/Tabishkh07/StayScout.git
-cd StayScout
-npm install
-npm start
+Environment variables are required for running this project.
+
+Create a `.env` file and configure the following values:
+
+- PORT
+- MONGO_URI
+- CLOUDINARY credentials
+- SESSION_SECRET
+
+These variables are required for authentication, database connection, and file uploads.
+
+How to Start
 
 ---
 
-## ⚙️ Environment Variables
+## Local Development
 
-Create a `.env` file in the root directory and add:
+Clone the repository and install dependencies.
 
-> Note: `.env` is ignored using `.gitignore` and should not be committed.
+Run the application in development mode using:
+npm start
+
+Once started, open http://localhost:3000 in your browser.
+
+---
+
 ---
 
 ## 📌 What I Learned
@@ -84,7 +97,10 @@ Create a `.env` file in the root directory and add:
 - Managing environment variables securely
 - Debugging and deploying a production-ready application on Render
 
+---
+
 🙌 Author
 Mohammed Tabish Khan
 🔗 LinkedIn: https://www.linkedin.com/in/mohammed-tabish-khan7/
 💻 GitHub: https://github.com/Tabishkh07
+
