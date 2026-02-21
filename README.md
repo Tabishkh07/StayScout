@@ -74,7 +74,7 @@ These variables are required for authentication, database connection, and file u
 
 ---
 
-###How to Start
+## How to Start
 
 ## Local Development
 
@@ -103,5 +103,6 @@ Once started, open http://localhost:3000 in your browser.
 Mohammed Tabish Khan
 
 🔗 LinkedIn: https://www.linkedin.com/in/mohammed-tabish-khan7/
+
 💻 GitHub: https://github.com/Tabishkh07
 
