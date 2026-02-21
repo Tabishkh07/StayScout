@@ -72,9 +72,9 @@ Create a `.env` file and configure the following values:
 
 These variables are required for authentication, database connection, and file uploads.
 
-How to Start
-
 ---
+
+###How to Start
 
 ## Local Development
 
@@ -101,6 +101,7 @@ Once started, open http://localhost:3000 in your browser.
 
 🙌 Author
 Mohammed Tabish Khan
+
 🔗 LinkedIn: https://www.linkedin.com/in/mohammed-tabish-khan7/
 💻 GitHub: https://github.com/Tabishkh07
 
