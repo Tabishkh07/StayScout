@@ -22,12 +22,6 @@ module.exports.listingSchema = Joi.object({
       "boat",
       "beach"
     ).required(),
-
-    image: Joi.object({
-      url: Joi.string().required(),
-      filename: Joi.string().required()
-    }).required()
-
   }).required()
 });
 
