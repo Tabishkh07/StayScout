@@ -19,7 +19,8 @@ module.exports.listingSchema = Joi.object({
       "farm",
       "arctic",
       "dome",
-      "boat"
+      "boat",
+      "beach"
     ).required(),
 
     image: Joi.object({
