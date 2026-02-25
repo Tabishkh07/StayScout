@@ -1,59 +1,173 @@
 <style>
-  .search-btn{ 
-    background-color:#fe424d;
+  /* ================== COMMON ================== */
+  .search-btn { 
+    background-color: #fe424d;
     color: #fff;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
   }
+
   .search-btn:hover { 
     background-color: #fe424d;
-    color:#fff;
+    color: #fff;
   }
-  .search-btn i{
-    display: inline;
+
+  .search-btn i {
     margin-right: 0.5rem;
   }
+
   .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem; 
+    padding: 0.5rem 1rem;
     font-size: 1rem;
   }
 
+  /* ================== MOBILE + TABLET (BELOW DESKTOP) ================== */
+  @media (max-width: 991.98px) {
+
+    /* keep navbar content visible */
+    .navbar-collapse {
+      display: flex !important;
+      flex-direction: column;
+    }
+
+    /* hide desktop items */
+    .desktop-only,
+    .navbar-toggler,
+    .navbar-brand {
+      display: none !important;
+    }
+
+    /* search bar */
+    .mobile-search-only {
+      display: block !important;
+      width: 100%;
+      padding: 0.5rem;
+    }
+
+    .mobile-search-only form {
+      width: 100%;
+    }
+
+    .mobile-search-only .search-inp {
+      width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .mobile-search-only .search-btn {
+      display: none;
+    }
+
+    /* show mobile footer */
+    .mobile-footer {
+      display: flex !important;
+    }
+
+    /* IMPORTANT: space for fixed footer */
+    body {
+      padding-bottom: 55px;
+    }
+  }
+
+  /* ================== DESKTOP ================== */
+  @media (min-width: 992px) {
+    .mobile-footer {
+      display: none !important;
+    }
+
+    body {
+      padding-bottom: 0;
+    }
+  }
+
+  /* ================== MOBILE FOOTER ================== */
+  .mobile-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    height: 56px;
+    background: #fff;
+    z-index: 1050;
+
+    justify-content: space-around;
+    align-items: center;
+
+    box-shadow: 0 -1px 6px rgba(0,0,0,0.08);
+  }
+
+  .mobile-footer a {
+    color: #222;
+    font-size: 0.9rem;
+  }
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNavAltMarkup" 
-    >
-    <span class="navbar-toggler-icon"></span>
+
+    <!-- LOGO (DESKTOP ONLY) -->
+    <a class="navbar-brand desktop-only" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+    </a>
+
+    <!-- TOGGLER (DESKTOP ONLY) -->
+    <button class="navbar-toggler desktop-only"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+
+      <!-- BRAND NAME -->
+      <div class="navbar-nav desktop-only">
         <a class="nav-link" href="/listings">StayScout</a>
       </div>
-      <!-- search -->
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search" action="/listings" method="GET">
-          <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination" name="q" aria-label="Search"/>
+
+      <!-- SEARCH (VISIBLE ON ALL, MOBILE-OPTIMIZED) -->
+      <div class="navbar-nav ms-auto mobile-search-only">
+        <form class="d-flex" action="/listings" method="GET">
+          <input
+            class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search Destination"
+            name="q"
+            style="border: 2px solid grey;"
+          />
           <button class="btn search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search</button>
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
         </form>
       </div>
-      <!-- for signup -->
-      <div class="navbar-nav ms-auto">
+
+      <!-- AUTH LINKS (DESKTOP ONLY) -->
+      <div class="navbar-nav ms-auto desktop-only">
         <a class="nav-link" href="/listings/new">Add Property</a>
+
         <% if (!currUser) { %>
-          <a class="nav-link" href="/signup"><b>Sign Up</b> </a>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
           <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
+
         <% if (currUser) { %>
           <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
       </div>
+
     </div>
   </div>
 </nav>
+
+<!-- ================== MOBILE BOTTOM FOOTER ================== -->
+<div class="mobile-footer border-top">
+  <% if (!currUser) { %>
+    <a href="/signup" class="text-decoration-none fw-bold">Sign up</a>
+    <a href="/login" class="text-decoration-none fw-bold">Log in</a>
+  <% } %>
+
+  <% if (currUser) { %>
+    <a href="/logout" class="text-decoration-none fw-bold">Log out</a>
+  <% } %>
+</div>
