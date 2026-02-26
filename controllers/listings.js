@@ -92,8 +92,17 @@ module.exports.createListing = async (req, res, next) => {
     );
 
     if (!response.ok) {
-      throw new Error(`Geocoding failed: ${response.status}`);
-    }
+  if (response.status === 429) {
+    req.flash(
+      "error",
+      "Too many requests. Please wait a minute and try again."
+    );
+    return res.redirect("/listings/new");
+  }
+
+  req.flash("error", "Unable to fetch location. Please try again later.");
+  return res.redirect("/listings/new");
+}
 
     const data = await response.json();
 
@@ -179,8 +188,17 @@ module.exports.updateListing = async (req, res, next) => {
       );
 
       if (!response.ok) {
-        throw new Error(`Geocoding failed: ${response.status}`);
-      }
+  if (response.status === 429) {
+    req.flash(
+      "error",
+      "Too many requests. Please wait a minute and try again."
+    );
+    return res.redirect(`/listings/${id}/edit`);
+  }
+
+  req.flash("error", "Unable to update location. Please try again later.");
+  return res.redirect(`/listings/${id}/edit`);
+}
 
       const data = await response.json();
 
