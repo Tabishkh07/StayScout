@@ -5,14 +5,9 @@
     color: #fff;
     border-radius: 25px;
     padding: 0 1rem;
-    display: flex;               /* keeps icon + text inline */
+    display: flex;
     align-items: center;
-    white-space: nowrap;         /* prevents wrapping */
-  }
-
-  .search-btn:hover { 
-    background-color: #fe424d;
-    color: #fff;
+    white-space: nowrap;
   }
 
   .search-btn i {
@@ -23,42 +18,50 @@
     border-radius: 25px;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    flex: 1;                     /* makes input longer */
+    flex: 1;
     min-width: 0;
   }
 
   /* ================== MOBILE + TABLET ================== */
   @media (max-width: 991.98px) {
 
-    .navbar-collapse {
-      display: flex !important;
-      flex-direction: column;
-    }
-
     .desktop-only,
-    .navbar-toggler,
-    .navbar-brand {
+    .navbar-toggler {
       display: none !important;
     }
 
-    .mobile-search-only {
-      display: block !important;
+    /* 🔥 MOBILE LOGO + SEARCH ROW */
+    .mobile-top-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.6rem;
+    }
+
+    .mobile-logo {
+      font-size: 1.5rem;
+      color: #fe424d;
+      text-decoration: none;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-search-only {
+      flex: 1;
     }
 
     .mobile-search-only form {
+      display: flex;
       width: 100%;
-      display: flex;             /* required for flex-grow */
       gap: 0.5rem;
     }
 
     .mobile-search-only .search-inp {
-      width: 100%;
       font-size: 0.95rem;
     }
 
-    /* show mobile footer */
     .mobile-footer {
       display: flex !important;
     }
@@ -70,6 +73,7 @@
 
   /* ================== DESKTOP ================== */
   @media (min-width: 992px) {
+    .mobile-top-row,
     .mobile-footer {
       display: none !important;
     }
@@ -102,31 +106,24 @@
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
 
-    <!-- LOGO (DESKTOP ONLY) -->
+    <!-- ================== DESKTOP LOGO ================== -->
     <a class="navbar-brand desktop-only" href="/listings">
       <i class="fa-regular fa-compass"></i>
     </a>
 
-    <!-- TOGGLER (DESKTOP ONLY) -->
-    <button class="navbar-toggler desktop-only"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- ================== MOBILE LOGO + SEARCH ================== -->
+    <div class="mobile-top-row">
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- MOBILE LOGO -->
+      <a href="/listings" class="mobile-logo">
+        <i class="fa-regular fa-compass"></i>
+      </a>
 
-      <!-- BRAND NAME -->
-      <div class="navbar-nav desktop-only">
-        <a class="nav-link" href="/listings">StayScout</a>
-      </div>
-
-      <!-- SEARCH -->
-      <div class="navbar-nav ms-auto mobile-search-only">
-        <form class="d-flex" action="/listings" method="GET">
+      <!-- MOBILE SEARCH -->
+      <div class="mobile-search-only">
+        <form action="/listings" method="GET">
           <input
-            class="form-control me-2 search-inp"
+            class="form-control search-inp"
             type="search"
             placeholder="Search Destination"
             name="q"
@@ -139,8 +136,12 @@
         </form>
       </div>
 
-      <!-- AUTH LINKS (DESKTOP ONLY) -->
+    </div>
+
+    <!-- ================== DESKTOP NAV ================== -->
+    <div class="collapse navbar-collapse">
       <div class="navbar-nav ms-auto desktop-only">
+        <a class="nav-link" href="/listings">StayScout</a>
         <a class="nav-link" href="/listings/new">Add Property</a>
 
         <% if (!currUser) { %>
@@ -152,8 +153,8 @@
           <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
       </div>
-
     </div>
+
   </div>
 </nav>
 
