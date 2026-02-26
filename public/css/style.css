@@ -136,3 +136,59 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   border: none;
 }
+
+/* =============================
+   MAP – DESKTOP (UNCHANGED)
+   ============================= */
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+}
+
+.map-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* =============================
+   LISTING IMAGE – DESKTOP
+   ============================= */
+.show-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* =============================
+   📱 MOBILE ONLY FIXES
+   ============================= */
+@media (max-width: 576px) {
+  #map {
+    height: 260px;
+  }
+
+  .show-img {
+    height: 220px;
+    border-radius: 8px;
+  }
+
+  .starability-slot {
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* =============================
+   STARABILITY SAFETY
+   ============================= */
+.card-body {
+  overflow: visible;
+}
+
+.starability-slot,
+.starability-result {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 1.5em;
+}
