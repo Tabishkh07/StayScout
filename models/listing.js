@@ -73,11 +73,10 @@ const ListingSchema = new Schema(
       type: {
         type: String,
         enum: ["Point"],
-        required: true
+        default: "Point"
       },
       coordinates: {
-        type: [Number],
-        required: true
+        type: [Number]
       }
     },
 
