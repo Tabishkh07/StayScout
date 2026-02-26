@@ -71,7 +71,6 @@ module.exports.showListing = async (req, res, next) => {
 // ==============================
 module.exports.createListing = async (req, res, next) => {
   try {
-    // 🔴 Image is REQUIRED on create
     if (!req.file) {
       req.flash("error", "Image is required");
       return res.redirect("/listings/new");
@@ -79,12 +78,22 @@ module.exports.createListing = async (req, res, next) => {
 
     const { location } = req.body.listing;
 
+    // 🌍 Geocoding (SAFE)
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
         location
       )}&limit=1`,
-      { headers: { "User-Agent": "StayScout-App" } }
+      {
+        headers: {
+          "User-Agent": "StayScout-App (contact@stayscout.com)",
+          "Accept": "application/json"
+        }
+      }
     );
+
+    if (!response.ok) {
+      throw new Error(`Geocoding failed: ${response.status}`);
+    }
 
     const data = await response.json();
 
@@ -161,8 +170,17 @@ module.exports.updateListing = async (req, res, next) => {
         `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
           newLocation
         )}&limit=1`,
-        { headers: { "User-Agent": "StayScout-App" } }
+        {
+          headers: {
+            "User-Agent": "StayScout-App (contact@stayscout.com)",
+            "Accept": "application/json"
+          }
+        }
       );
+
+      if (!response.ok) {
+        throw new Error(`Geocoding failed: ${response.status}`);
+      }
 
       const data = await response.json();
 
@@ -182,7 +200,7 @@ module.exports.updateListing = async (req, res, next) => {
 
     Object.assign(listing, req.body.listing);
 
-    // 🔥 Cloudinary cleanup on image update
+    // ☁️ Cloudinary cleanup
     if (req.file) {
       if (listing.image && listing.image.filename) {
         await cloudinary.uploader.destroy(listing.image.filename);
@@ -215,7 +233,6 @@ module.exports.destroyListing = async (req, res, next) => {
       return res.redirect("/listings");
     }
 
-    // 🔥 Cloudinary cleanup on delete
     if (listing.image && listing.image.filename) {
       await cloudinary.uploader.destroy(listing.image.filename);
     }
