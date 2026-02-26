@@ -76,60 +76,59 @@ module.exports.createListing = async (req, res, next) => {
       return res.redirect("/listings/new");
     }
 
-    const { location } = req.body.listing;
-
-    // 🌍 Geocoding (SAFE)
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-        location
-      )}&limit=1`,
-      {
-        headers: {
-          "User-Agent": "StayScout-App (contact@stayscout.com)",
-          "Accept": "application/json"
-        }
-      }
-    );
-
-    if (!response.ok) {
-  if (response.status === 429) {
-    req.flash(
-      "error",
-      "Too many requests. Please wait a minute and try again."
-    );
-    return res.redirect("/listings/new");
-  }
-
-  req.flash("error", "Unable to fetch location. Please try again later.");
-  return res.redirect("/listings/new");
-}
-
-    const data = await response.json();
-
-    if (!data || data.length === 0) {
-      req.flash("error", "Invalid location");
-      return res.redirect("/listings/new");
-    }
-
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
 
+    // Image
     newListing.image = {
       url: req.file.path,
       filename: req.file.filename
     };
 
-    newListing.geometry = {
-      type: "Point",
-      coordinates: [
-        parseFloat(data[0].lon),
-        parseFloat(data[0].lat)
-      ]
-    };
+    // 🌍 OPTIONAL geocoding
+    try {
+      const location = req.body.listing.location;
 
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          location
+        )}&limit=1`,
+        {
+          headers: {
+            "User-Agent": "StayScout-App (contact@stayscout.com)",
+            "Accept": "application/json"
+          }
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.length > 0) {
+          newListing.geometry = {
+            type: "Point",
+            coordinates: [
+              parseFloat(data[0].lon),
+              parseFloat(data[0].lat)
+            ]
+          };
+        }
+      }
+    } catch (err) {
+      // 🔕 silently ignore geocoding errors
+    }
+
+    // ✅ ALWAYS SAVE LISTING
     await newListing.save();
-    req.flash("success", "New listing created!");
+
+    req.flash(
+      "success",
+      newListing.geometry
+        ? "New listing created!"
+        : "Listing created, but location could not be mapped."
+    );
+
     res.redirect("/listings");
+
   } catch (err) {
     next(err);
   }
