@@ -166,21 +166,40 @@
     </div>
 
     <!-- ================== DESKTOP NAV ================== -->
-    <div class="collapse navbar-collapse">
-      <div class="navbar-nav ms-auto desktop-only">
-        <!-- <a class="nav-link" href="/listings">StayScout</a> -->
-        <a class="nav-link" href="/listings/new">Add Property</a>
+    <!-- ================== DESKTOP NAV ================== -->
+<!-- ================== DESKTOP NAV ================== -->
+<div class="collapse navbar-collapse">
 
-        <% if (!currUser) { %>
-          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-          <a class="nav-link" href="/login"><b>Log in</b></a>
-        <% } %>
+  <!-- 🔥 DESKTOP SEARCH (CENTERED) -->
+  <form class="d-flex mx-auto desktop-only" action="/listings" method="GET">
+    <input
+      class="form-control me-2 search-inp"
+      type="search"
+      placeholder="Search Destination"
+      name="q"
+      style="border: 2px solid rgb(201, 201, 201); min-width: 300px;"
+    />
+    <button class="btn search-btn" type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      Search
+    </button>
+  </form>
 
-        <% if (currUser) { %>
-          <a class="nav-link" href="/logout"><b>Log out</b></a>
-        <% } %>
-      </div>
-    </div>
+  <!-- RIGHT SIDE LINKS -->
+  <div class="navbar-nav desktop-only">
+    <a class="nav-link" href="/listings/new">Add Property</a>
+
+    <% if (!currUser) { %>
+      <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+      <a class="nav-link" href="/login"><b>Log in</b></a>
+    <% } %>
+
+    <% if (currUser) { %>
+      <a class="nav-link" href="/logout"><b>Log out</b></a>
+    <% } %>
+  </div>
+
+</div>
 
   </div>
 </nav>
