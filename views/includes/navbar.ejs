@@ -101,6 +101,32 @@
     color: #222;
     font-size: 0.9rem;
   }
+
+  /* ================== FLOATING ADD BUTTON (MOBILE) ================== */
+.floating-add-btn {
+  position: fixed;
+  bottom: 75px;              /* above mobile footer */
+  right: 16px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #fe424d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  text-decoration: none;
+  z-index: 1100;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* hide on desktop */
+@media (min-width: 992px) {
+  .floating-add-btn {
+    display: none;
+  }
+}
 </style>
 
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
@@ -109,6 +135,7 @@
     <!-- ================== DESKTOP LOGO ================== -->
     <a class="navbar-brand desktop-only" href="/listings">
       <i class="fa-regular fa-compass"></i>
+      <span class="fw-bold">StayScout</span>
     </a>
 
     <!-- ================== MOBILE LOGO + SEARCH ================== -->
@@ -141,7 +168,7 @@
     <!-- ================== DESKTOP NAV ================== -->
     <div class="collapse navbar-collapse">
       <div class="navbar-nav ms-auto desktop-only">
-        <a class="nav-link" href="/listings">StayScout</a>
+        <!-- <a class="nav-link" href="/listings">StayScout</a> -->
         <a class="nav-link" href="/listings/new">Add Property</a>
 
         <% if (!currUser) { %>
@@ -157,6 +184,11 @@
 
   </div>
 </nav>
+
+<!-- ================== FLOATING + BUTTON (MOBILE) ================== -->
+<a href="/listings/new" class="floating-add-btn">
+  <i class="fa-solid fa-plus"></i>
+</a>
 
 <!-- ================== MOBILE BOTTOM FOOTER ================== -->
 <div class="mobile-footer border-top">
