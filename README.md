@@ -6,7 +6,10 @@ The project focuses on real-world backend development, authentication, image upl
 🔗 **Live Demo:** https://stay-scout.onrender.com  
 📂 **GitHub Repo:** https://github.com/Tabishkh07/StayScout
 
-<img width="1440" height="744" alt="Screenshot 2026-02-21 at 10 58 39 AM" src="https://github.com/user-attachments/assets/7fe0500f-f1ee-435d-a846-5e693040157e" />
+<img width="1440" height="821" alt="Screenshot 2026-03-07 at 11 43 56 PM" src="https://github.com/user-attachments/assets/64b0b27b-3bbe-497a-94a4-91f16e4ba59a" />
+<img width="1440" height="821" alt="Screenshot 2026-03-07 at 11 44 13 PM" src="https://github.com/user-attachments/assets/1b6ccbf0-0839-4a7d-9536-e65436e3c712" />
+<img width="1440" height="819" alt="Screenshot 2026-03-07 at 11 44 38 PM" src="https://github.com/user-attachments/assets/9fce1ced-6db3-4397-83a0-573869a8252f" />
+
 
 ---
 
