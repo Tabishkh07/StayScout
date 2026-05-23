@@ -194,7 +194,7 @@
       <a class="nav-link" href="/login"><b>Log in</b></a>
     <% } %>
 
-    <% if (currUser) { %>
+    <% if (locals.currUser) { %>
       <a class="nav-link" href="/logout"><b>Log out</b></a>
     <% } %>
   </div>
@@ -211,12 +211,12 @@
 
 <!-- ================== MOBILE BOTTOM FOOTER ================== -->
 <div class="mobile-footer border-top">
-  <% if (!currUser) { %>
+  <% if (!locals.currUser) { %>
     <a href="/signup" class="text-decoration-none fw-bold">Sign up</a>
     <a href="/login" class="text-decoration-none fw-bold">Log in</a>
   <% } %>
 
-  <% if (currUser) { %>
+  <% if (locals.currUser) { %>
     <a href="/logout" class="text-decoration-none fw-bold">Log out</a>
   <% } %>
 </div>
