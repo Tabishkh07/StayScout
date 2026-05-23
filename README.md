@@ -3,7 +3,7 @@
 StayScout is a full-stack Airbnb-style web application that allows users to explore, create, and manage property listings.  
 The project focuses on real-world backend development, authentication, image uploads, and deployment.
 
-🔗 **Live Demo:** https://stay-scout.onrender.com  
+🔗 **Live Demo:** [https://stay-scout.onrender.com](https://stayscout-fhfk.onrender.com/listings)  
 📂 **GitHub Repo:** https://github.com/Tabishkh07/StayScout
 
 # Home Page
