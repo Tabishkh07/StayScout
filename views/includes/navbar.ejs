@@ -189,7 +189,7 @@
   <div class="navbar-nav desktop-only">
     <a class="nav-link" href="/listings/new">Add Property</a>
 
-    <% if (!currUser) { %>
+    <% if (!locals.currUser) { %>
       <a class="nav-link" href="/signup"><b>Sign Up</b></a>
       <a class="nav-link" href="/login"><b>Log in</b></a>
     <% } %>
