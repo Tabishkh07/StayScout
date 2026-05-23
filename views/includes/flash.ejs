@@ -1,5 +1,5 @@
 <!-- for success -->
-<% if(success && success.length){ %>
+<% if(locals.success && locals.success.length){ %>
     <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-2" role="alert">
         <%= success %>
         <button 
@@ -12,7 +12,7 @@
 <%}%>
 
 <!-- for error -->
- <% if(error && error.length){ %>
+ <% if(locals.error && locals.error.length){ %>
     <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-2" role="alert">
         <%= error %>
         <button 
